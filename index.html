@@ -10,6 +10,8 @@
     <meta name="theme-color" content="#121212">
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2964/2964514.png">
     <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2964/2964514.png">
+    
+    <link rel="manifest" href="manifest.json">
 
     <title>Fitness App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -31,7 +33,6 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
-            /* Verhindert das "Zurückwischen" bei echten Apps */
             overscroll-behavior-y: none; 
         }
 
@@ -39,7 +40,6 @@
             display: flex;
             background-color: var(--card-bg);
             padding: 10px;
-            /* Berücksichtigt die "Notch" bei modernen iPhones im Vollbild */
             padding-top: env(safe-area-inset-top, 10px);
             overflow-x: auto;
             border-bottom: 1px solid var(--border-color);
@@ -200,7 +200,6 @@
             cursor: pointer;
         }
 
-        /* Das Copyright */
         .credit {
             text-align: center;
             margin-top: 30px;
@@ -429,6 +428,14 @@
         }
 
         render();
+
+        // HIER IST DER NEUE SERVICE WORKER AUFRUF
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js');
+            });
+        }
     </script>
 </body>
 </html>
+
